@@ -17,7 +17,7 @@ import os
 
 class MBertAnnotator(SpanAnnotator):
     """Annotation based on multi-lingual BERT trained on Stanford Sentiment Treebank"""
-    def __init__(self, name, root="kaggle/working"):
+    def __init__(self, name, root="/kaggle/working"):
         super(MBertAnnotator, self).__init__(name)
         self.classifier = BertForSequenceClassification.from_pretrained(root+ "/data/sentiment/models/sst", num_labels=3)
         self.classifier.eval() # type: ignore
