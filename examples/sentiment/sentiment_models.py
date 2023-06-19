@@ -17,12 +17,12 @@ import os
 
 class MBertAnnotator(SpanAnnotator):
     """Annotation based on multi-lingual BERT trained on Stanford Sentiment Treebank"""
-    def __init__(self, name):
+    def __init__(self, name, root="kaggle/working"):
         super(MBertAnnotator, self).__init__(name)
-        self.classifier = BertForSequenceClassification.from_pretrained("../data/sentiment/models/sst", num_labels=3)
+        self.classifier = BertForSequenceClassification.from_pretrained(root+ "/data/sentiment/models/sst", num_labels=3)
         self.classifier.eval() # type: ignore
         self.tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-uncased")
-        print("Loaded mBERT from {}".format("../data/sentiment/models/sst"))
+        print("Loaded mBERT from {}".format(root + "/data/sentiment/models/sst"))
 
     def find_spans(self, doc: Doc) -> Iterable[Tuple[int, int, str]]:
 
