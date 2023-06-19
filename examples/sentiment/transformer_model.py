@@ -89,7 +89,7 @@ class DocbinDataLoader():
             num_batches += 1
         return num_batches
 
-def train(model, save_dir="../data/sentiment/models/norbert"):
+def train(model, tokenizer, train_loader, dev_loader, save_dir="../data/sentiment/models/norbert"):
     model.train()
 
 
