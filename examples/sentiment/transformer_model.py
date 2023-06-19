@@ -89,27 +89,27 @@ class DocbinDataLoader():
             num_batches += 1
         return num_batches
 
-def train(model, tokenizer, train_loader, dev_loader, save_dir="../data/sentiment/models/norbert"):
+def train(model, tokenizer, train_loader, dev_loader, save_dir="../data/sentiment/models/norbert", warmup_steps=50, num_train_epochs=20, train_batch_size=16, eval_batch_size=16):
     model.train()
 
 
     optimizer = AdamW(model.parameters(), lr=1e-5)
 
-    num_train_steps = int(len(train_loader.examples) / args.train_batch_size) * args.num_train_epochs
+    num_train_steps = int(len(train_loader.examples) / train_batch_size) * num_train_epochs
 
-    scheduler = get_linear_schedule_with_warmup(optimizer, args.warmup_steps, num_train_steps)
+    scheduler = get_linear_schedule_with_warmup(optimizer, warmup_steps, num_train_steps)
 
     best_dev_f1 = 0.0
 
-    print("training for {} epochs...".format(args.num_train_epochs))
+    print("training for {} epochs...".format(num_train_epochs))
 
-    for epoch_num, epoch in enumerate(range(args.num_train_epochs)):
+    for epoch_num, epoch in enumerate(range(num_train_epochs)):
         model.train()
         train_loss = 0
         num_batches = 0
         train_preds = []
         train_gold = []
-        for b in tqdm(train_loader.get_batches(batch_size=args.train_batch_size), total=train_loader.get_num_batches(batch_size=args.train_batch_size)):
+        for b in tqdm(train_loader.get_batches(batch_size=train_batch_size), total=train_loader.get_num_batches(batch_size=train_batch_size)):
             labels, sents = b
             encoding = tokenizer(sents, return_tensors='pt', padding=True, truncation=True, max_length=150)
 
@@ -133,7 +133,7 @@ def train(model, tokenizer, train_loader, dev_loader, save_dir="../data/sentimen
         num_batches = 0
         dev_preds = []
         dev_gold = []
-        for b in tqdm(dev_loader.get_batches(batch_size=args.eval_batch_size), total=dev_loader.get_num_batches(batch_size=args.eval_batch_size)):
+        for b in tqdm(dev_loader.get_batches(batch_size=eval_batch_size), total=dev_loader.get_num_batches(batch_size=eval_batch_size)):
             labels, sents = b
             encoding = tokenizer(sents, return_tensors='pt', padding=True, truncation=True, max_length=150)
 
@@ -154,14 +154,14 @@ def train(model, tokenizer, train_loader, dev_loader, save_dir="../data/sentimen
             model.save_pretrained(save_dir)
 
 
-def test(model):
+def test(model, eval_batch_size=16):
     print("loading best model on dev data")
     model.eval()
     test_loss = 0
     num_batches = 0
     test_preds = []
     test_gold = []
-    for b in tqdm(test_loader.get_batches(batch_size=args.eval_batch_size), total=test_loader.get_num_batches(batch_size=args.eval_batch_size)):
+    for b in tqdm(test_loader.get_batches(batch_size=eval_batch_size), total=test_loader.get_num_batches(batch_size=eval_batch_size)):
         labels, sents = b
         encoding = tokenizer(sents, return_tensors='pt', padding=True, truncation=True, max_length=150)
 
