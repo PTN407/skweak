@@ -154,7 +154,7 @@ def train(model, tokenizer, train_loader, dev_loader, save_dir="../data/sentimen
             model.save_pretrained(save_dir)
 
 
-def test(model, test_loader, eval_batch_size=16):
+def test(model, tokenizer, test_loader, eval_batch_size=16):
     print("loading best model on dev data")
     model.eval()
     test_loss = 0
