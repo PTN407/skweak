@@ -50,7 +50,7 @@ class FullSentimentAnnotator(CombinedAnnotator):
         return self
 
     def add_ml_models(self, root):
-        self.add_annotator(DocBOWAnnotator("doc-level-norec", root + "/data/sentiment/models/bow"))
+        self.add_annotator(DocBOWAnnotator("doc-level-norec", root + "/data/sentiment/models/doc"))
         self.add_annotator(MultilingualAnnotator("nlptown-bert-multilingual-sentiment"))
         self.add_annotator(MBertAnnotator("mbert-sst"))
         return self
