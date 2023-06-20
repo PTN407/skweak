@@ -196,18 +196,18 @@ if __name__ == "__main__":
     # train_loader = SSTDataLoader("../data/sentiment/sst/train.txt")
     # dev_loader = SSTDataLoader("../data/sentiment/sst/dev.txt")
     # test_loader = SSTDataLoader("../data/sentiment/sst/test.txt")
-    train_loader = DocbinDataLoader("../data/sentiment/norec_sentence/train_pred.docbin", num_examples=500, gold=args.train_on_gold)
-    dev_loader = DocbinDataLoader("../data/sentiment/norec_sentence/dev_pred.docbin", num_examples=500, gold=args.train_on_gold)
-    test_loader = DocbinDataLoader("../data/sentiment/norec_sentence/test_pred.docbin", gold=True)
+    # train_loader = DocbinDataLoader("../data/sentiment/norec_sentence/train_pred.docbin", num_examples=500, gold=args.train_on_gold)
+    # dev_loader = DocbinDataLoader("../data/sentiment/norec_sentence/dev_pred.docbin", num_examples=500, gold=args.train_on_gold)
+    # test_loader = DocbinDataLoader("../data/sentiment/norec_sentence/test_pred.docbin", gold=True)
 
-    print("loading model...")
-    tokenizer = BertTokenizer.from_pretrained("ltgoslo/norbert")
-    model = BertForSequenceClassification.from_pretrained(args.model, num_labels=3)
+    # print("loading model...")
+    # tokenizer = BertTokenizer.from_pretrained("ltgoslo/norbert")
+    # model = BertForSequenceClassification.from_pretrained(args.model, num_labels=3)
 
-    if args.train:
-        train(model, args.save_dir)
+    # if args.train:
+    #     train(model, args.save_dir)
 
-    # Test model
-    if args.test:
-        test(model)
+    # # Test model
+    # if args.test:
+    #     test(model)
 
