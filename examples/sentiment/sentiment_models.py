@@ -19,10 +19,10 @@ class MBertAnnotator(SpanAnnotator):
     """Annotation based on multi-lingual BERT trained on Stanford Sentiment Treebank"""
     def __init__(self, name, root="/kaggle/working/skweak"):
         super(MBertAnnotator, self).__init__(name)
-        self.classifier = BertForSequenceClassification.from_pretrained(root+ "/data/sentiment/models/sst", num_labels=3)
+        self.classifier = BertForSequenceClassification.from_pretrained(root+ "/data/sentiment/models/mbert-sst", num_labels=3)
         self.classifier.eval() # type: ignore
         self.tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-uncased")
-        print("Loaded mBERT from {}".format(root + "/data/sentiment/models/sst"))
+        print("Loaded mBERT from {}".format(root + "/data/sentiment/models/mbert-sst"))
 
     def find_spans(self, doc: Doc) -> Iterable[Tuple[int, int, str]]:
 
