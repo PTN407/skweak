@@ -34,7 +34,7 @@ class AbstractAnnotator:
 
     def annotate_docbin(self, docbin_input_path: str,
                         docbin_output_path: Optional[str] = None,
-                        spacy_model_name: str = "en_core_web_md",
+                        spacy_model_name: str = "nb_core_news_md",
                         cutoff: Optional[int] = None, nb_to_skip: int = 0):
         """Runs the annotator on the documents of a DocBin file, and write the output
         to docbin_output_path (or to the same file if it is set to None). The spacy 
