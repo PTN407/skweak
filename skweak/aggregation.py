@@ -287,7 +287,7 @@ class TextAggregatorMixin(AbstractAggregator):
             for span in doc.spans[source]:
                 if span.label in observed_labels:
                     span_index = spans_indices[(span.start, span.end)]
-                    data[span_index, source_index] = label_indices[span.label_]
+                    data[span_index, source_index] = label_indices[span.label]
 
         # We only consider spans with at least one concrete prediction
         masking = np.full(len(unique_spans), fill_value=True, dtype=bool)
