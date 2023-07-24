@@ -140,11 +140,11 @@ def get_next_sentence_boundaries(doc: Doc) -> List[int]:
 ############################################
 
 
-def docbin_reader(docbin_file_path: str, spacy_model_name: str = "en_core_web_md",
+def docbin_reader(docbin_file_path: str, spacy_model_name: str = "nb_core_news_md",
                   cutoff: Optional[int] = None, nb_to_skip: int = 0):
     """Read a binary file containing a DocBin repository of spacy documents.
     In addition to the file path, we also need to provide the name of the spacy
-    model (which is necessary to load the vocabulary), such as "en_core_web_md".
+    model (which is necessary to load the vocabulary), such as "nb_core_news_md".
 
     If cutoff is specified, the method will stop after generating the given
     number of documents. If nb_to_skip is > 0, the method will skip the given
