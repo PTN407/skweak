@@ -275,7 +275,7 @@ class Trie:
 
 
 def extract_json_data(json_file: str, cutoff: Optional[int] = None,
-                      spacy_model="en_core_web_md") -> Dict[str, Trie]:
+                      spacy_model="nb_core_news_md") -> Dict[str, Trie]:
     """Extract entities from a Json file and build trie from it (one per class).
 
     If cutoff is set to a number, stops the extraction after a number of values
