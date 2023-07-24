@@ -285,7 +285,7 @@ class TextAggregatorMixin(AbstractAggregator):
         
         for source_index, source in enumerate(sources):
             for span in doc.spans[source]:
-                if span.label_ in observed_labels:
+                if span.label in observed_labels:
                     span_index = spans_indices[(span.start, span.end)]
                     data[span_index, source_index] = label_indices[span.label_]
 
